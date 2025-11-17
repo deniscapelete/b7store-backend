@@ -25,7 +25,30 @@ class ProductController extends Controller
                 'products' => []
             ], 400);
         }
-        $products = Product::with('images')->get();
+
+        $limit = $request->query('limit', 10);
+        $orderBy = 'id';
+
+        $query = Product::query();
+        if ($request->query('orderBy')) {
+            switch ($request->query('orderBy')) {
+                case 'views':
+                    $orderBy = 'views_count';
+                    break;
+                case 'selling':
+                    $orderBy = 'sales_Count';
+                    break;
+                case 'price':
+                    $orderBy = 'price';
+                    break;
+            }
+        };
+
+        $query->orderBy($orderBy, 'desc');
+        $query->with('images');
+        $query->limit($limit);
+
+        $products = $query->get();
         return response()->json([
             'error' => null,
             'products' => $products->map(function ($product) {
