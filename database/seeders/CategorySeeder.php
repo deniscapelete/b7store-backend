@@ -13,13 +13,13 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         Category::create([
-            'name' => 'Categoria de exemplo1',
-            'slug' => 'Categoria de exemplo1'
+            'name' => 'Camisetas',
+            'slug' => 'camisetas'
         ]);
 
         Category::create([
-            'name' => 'Categoria de exemplo2',
-            'slug' => 'Categoria de exemplo2'
+            'name' => 'Eletrônicos',
+            'slug' => 'eletronicos'
         ]);
     }
 }
