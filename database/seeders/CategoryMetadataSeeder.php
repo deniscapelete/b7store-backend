@@ -13,13 +13,33 @@ class CategoryMetadataSeeder extends Seeder
      */
     public function run(): void
     {
-        Category::first()->metadata()->create([
+        $metadataTec = Category::first()->metadata()->create([
             'id' => 'tecnologias',
             'name' => 'Tecnologia'
         ]);
-        Category::first()->metadata()->create([
+        $metadataCor = Category::first()->metadata()->create([
             'id' => 'cor',
             'name' => 'Cor'
+        ]);
+
+        $metadataCor->values()->create([
+            'id' => 'preto',
+            'label' => 'Preto'
+        ]);
+
+        $metadataCor->values()->create([
+            'id' => 'azul',
+            'label' => 'Azul'
+        ]);
+
+        $metadataTec->values()->create([
+            'id' => 'laravel',
+            'label' => 'Laravel'
+        ]);
+
+        $metadataTec->values()->create([
+            'id' => 'react-native',
+            'label' => 'React-Native'
         ]);
     }
 }
