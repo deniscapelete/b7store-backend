@@ -14,8 +14,8 @@ class ProductSeeder extends Seeder
     public function run(): void
     {
         Product::create([
-            'label' => 'Produto de exemplo1',
-            'description' => 'Descrição do produto de exemplo1',
+            'label' => 'Camiseta (Laravel Azul)',
+            'description' => 'Camiseta do laravel e azul',
             'price' => 39.99,
             'views_count' => 0,
             'sales_count' => 0,

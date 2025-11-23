@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -40,6 +41,21 @@ class CategoryMetadataSeeder extends Seeder
         $metadataTec->values()->create([
             'id' => 'react-native',
             'label' => 'React-Native'
+        ]);
+
+        Product::first()->metadata()->create([
+            'category_metadata_id' => 'cor',
+            'metadata_value_id' => 'azul'
+        ]);
+
+        Product::first()->metadata()->create([
+            'category_metadata_id' => 'tecnologia',
+            'metadata_value_id' => 'laravel'
+        ]);
+
+        Product::first()->metadata()->create([
+            'category_metadata_id' => 'tecnologia',
+            'metadata_value_id' => 'react-native'
         ]);
     }
 }
