@@ -26,10 +26,31 @@ class ProductController extends Controller
             ], 400);
         }
 
+
+        $metadata = [];
+        if ($request->filled('metadata')) {
+            $rawMetadata = $request->query('metadata');
+            $metadata = json_decode($rawMetadata, true);
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                return response()->json([
+                    'error' => 'O metadata deve ser um JSON válido',
+                    'products' => []
+                ], 400);
+            }
+        }
+
         $limit = $request->query('limit', 10);
         $orderBy = 'id';
 
-        $query = Product::query();
+        $query = Product::query()->with('metadata');
+
+        foreach ($metadata as $key => $value) {
+            $query->whereHas('metadata', function ($q) use ($key, $value) {
+                $q->where('category_metadata_id', $key)
+                    ->where('metadata_value_id', $value);
+            });
+        }
+
         if ($request->query('orderBy')) {
             switch ($request->query('orderBy')) {
                 case 'views':
